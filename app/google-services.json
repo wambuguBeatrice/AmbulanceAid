@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "397734003720",
+    "project_id": "ambulance-aid",
+    "storage_bucket": "ambulance-aid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:397734003720:android:7d8575810eb7ca97d4bdbd",
+        "android_client_info": {
+          "package_name": "com.beatrice.ambulanceaid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "397734003720-etc20rijtgrul3oi5vfs2v5q9gloqeal.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtzi9X6dGHABgxVIHNzC4qLFacTQjxTzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "397734003720-etc20rijtgrul3oi5vfs2v5q9gloqeal.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:397734003720:android:17b31c683241ff1fd4bdbd",
+        "android_client_info": {
+          "package_name": "com.example.user_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "397734003720-etc20rijtgrul3oi5vfs2v5q9gloqeal.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtzi9X6dGHABgxVIHNzC4qLFacTQjxTzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "397734003720-etc20rijtgrul3oi5vfs2v5q9gloqeal.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

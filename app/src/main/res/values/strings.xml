@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Ambulance Aid</string>
+    <string name="image" />
+    <string name="new_account">Sign Up</string>
+    <string name="signup_desc">Create a new account in a few steps</string>
+    <string name="message">Check your email to verify your account</string>
+    <string name="login_desc">Enter your email and password to get started</string>
+    <string name="log_in">Log In</string>
+    <string name="reset_pass_message">Forgot your password? Reset it now.</string>
+
+    <!--to toggle the open close button
+        of the navigation drawer-->
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="linda">Linda</string>
+    <string name="Beatrice">Beatrice</string>
+    <string name="k">Ksh</string>
+    <string name="pd">per day</string>
+    <string name="rc">Request</string>
+    <string name="provi">Recommended For You || View More</string>
+    <string name="cont">Contact</string>
+    <string name="samplereview">Great Customer Care!</string>
+    <string name="option">options</string>
+    <string name="show_menu">Confirm Option</string>
+    <string name="pumbling">Pumbling</string>
+    <string name="laundry">Laundry</string>
+    <string name="Electricity">Electricity</string>
+    <string name="next">Next</string>
+    <string name="mail">Email</string>
+    <string name="digits">0712345678</string>
+    <string name="mn">Mobile Number</string>
+    <string name="ds">Pam Halpert</string>
+    <string name="name">First Name</string>
+    <string name="data">Kindly enter the following details to continue</string>
+</resources>
