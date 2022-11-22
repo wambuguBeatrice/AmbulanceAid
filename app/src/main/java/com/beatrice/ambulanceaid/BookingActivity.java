@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,7 @@ public class BookingActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton basic, advanced, radioButton;
     TextView amount;
-    Button bookingA;
+    Button booking;
     private ArrayList<ModelAmubulance> hospitalList;
 
 
@@ -41,7 +42,14 @@ public class BookingActivity extends AppCompatActivity {
         basic = findViewById(R.id.basicRB);
         advanced = findViewById(R.id.advancedRB);
         amount = findViewById(R.id.amount);
-        bookingA = (Button) findViewById(R.id.booking);
+        booking = (Button) findViewById(R.id.booking);
+        booking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BookingActivity.this, confirm_Booking.class);
+                startActivity(intent);
+            }
+        });
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.date_picker);
         int day = datePicker.getDayOfMonth();

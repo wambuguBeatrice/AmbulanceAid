@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         button7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, BookingActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoadHospitalsActivity.class);
                 startActivity(intent);
             }
         });

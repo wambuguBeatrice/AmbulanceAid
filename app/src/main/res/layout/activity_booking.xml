@@ -219,42 +219,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/providertext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Please Choose Ambulance Service Provider"
-            android:textColor="@color/green"
-            android:textStyle="italic"
-            android:textSize="17dp"
-            android:layout_below="@+id/time_picker"/>
-
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_below="@+id/providertext"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
-        <TextView
-            android:id="@+id/hospitaltext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/spinner1"
-            android:text="Please Choose Hospital To go to"
-            android:textSize="17dp"
-            android:textStyle="italic"
-            android:textColor="@color/green"/>
-
-        <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/hospitaltext" />
 
         <Button
             android:id="@+id/booking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/spinner2"
+            android:layout_below="@+id/time_picker"
             android:layout_alignParentBottom="true"
             android:background="@drawable/circularbluebordersolid"
             android:fontFamily="@font/regular"

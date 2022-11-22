@@ -11,4 +11,8 @@
 
     <color name="gradientViolet">#8A52E9</color>
     <color name="gradientLightBlue">#376DF6</color>
+
+    <color name="yellow">#FF9800</color>
+    <color name="colorGreen">#43A047</color>
+    <color name="colorRed">#C81609</color>
 </resources>
