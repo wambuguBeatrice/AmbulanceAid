@@ -18,12 +18,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+import java.util.HashMap;
+
+public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
@@ -71,12 +80,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressDialog = new ProgressDialog(this);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() !=null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        }
+
         // Set Listeners
-        link_signup.setOnClickListener(this);
+//        link_signup.setOnClickListener(this);
         link_forgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,12 +91,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-        btn_login.setOnClickListener(this);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userLogin();
+            }
+        });
     }
 
+    String email, password;
     private void userLogin(){
-        String email = input_email.getText().toString().trim();
-        String password  = input_password.getText().toString().trim();
+         email = input_email.getText().toString().trim();
+        password  = input_password.getText().toString().trim();
 
         // If email is empty, return
         if (TextUtils.isEmpty(email)){
@@ -109,51 +121,90 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Sign in with email and password
         firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
-                        if (task.isSuccessful()){
-                            // If email is not verified, verify
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            if (!user.isEmailVerified()){
-                                Toast.makeText(LoginActivity.this, "Please Verify your email first.",Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                // start main activity
-                                finish();
-                                Toast.makeText(LoginActivity.this, "Kindly fill in these details", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), Moreinfo.class));
-                            }
-                        }
-                        else {
-                            // Failed to log in
-                            Toast.makeText(LoginActivity.this, "Authentication failed.Please Try again",Toast.LENGTH_SHORT).show();
-                        }
+                    public void onSuccess(AuthResult authResult) {
+                        // log in users
+                        makemeOnline();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginActivity.this,""+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    @Override
-    public void onClick(View view){
-        if (view == btn_login){
-            userLogin();
-        }
-        else if (view == link_signup){
-            finish();
-            startActivity(new Intent(this, SignUpActivity.class ));
-        }
-        else if (view == link_forgotpassword){
-            // Reset password through email
-            firebaseAuth.getInstance().sendPasswordResetEmail("wambugu.beatrice@strathmore.edu")
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(context, "Email Sent", Toast.LENGTH_LONG).show();
+    private void makemeOnline() {
+        progressDialog.setMessage("Checking Usage");
+
+        HashMap<String, Object>hashMap = new HashMap<>();
+        hashMap.put("online", "true");
+
+        // update value to db
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(firebaseAuth.getUid()).updateChildren(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        checkUserType();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void checkUserType() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.orderByChild("uid").equalTo(firebaseAuth.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot ds: snapshot.getChildren()){
+                            String accountType = ""+ds.child("accountType").getValue();
+                            if(accountType.equals("User")){
+                                progressDialog.dismiss();
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
+                            }else{
+                                progressDialog.dismiss();
+                                startActivity(new Intent(LoginActivity.this, HospitalMainActivity.class));
+                                finish();
                             }
                         }
-                    });
-        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
+
+    //@Override
+//    public void onClick(View view){
+//        if (view == btn_login){
+//            userLogin();
+//        }
+//        else if (view == link_signup){
+//            finish();
+//            startActivity(new Intent(this, SignUpActivity.class ));
+//        }
+//        else if (view == link_forgotpassword){
+//            // Reset password through email
+//            firebaseAuth.getInstance().sendPasswordResetEmail("wambugu.beatrice@strathmore.edu")
+//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if (task.isSuccessful()) {
+//                                Toast.makeText(context, "Email Sent", Toast.LENGTH_LONG).show();
+//                            }
+//                        }
+//                    });
+//        }
+//    }
 }

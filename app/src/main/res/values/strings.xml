@@ -32,4 +32,10 @@
     <string name="ds">Pam Halpert</string>
     <string name="name">First Name</string>
     <string name="data">Kindly enter the following details to continue</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps2">MapsActivity2</string>
+    <string name="title_activity_hospitalrequest">Hospitalrequest</string>
+    <string name="title_activity_emergency">Emergency</string>
+    <string name="title_activity_hospital_request">HospitalRequest</string>
+    <string name="title_activity_hospital_requests">HospitalRequests</string>
 </resources>

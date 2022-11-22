@@ -1,6 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".BookingActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backbtn"
+            android:src="@drawable/backbtn"
+            android:layout_marginTop="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="false"/>
+
+
+        <ImageView
+            android:id="@+id/imageview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:src="@drawable/ambulance" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:padding="10dp"
+            android:layout_below="@+id/imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/regular"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="17sp"
+            android:textColor="@color/green"
+            android:textStyle="bold"
+            android:text="Confirm The Ambulance Type You Need"/>
+
+        <RadioGroup
+            android:id="@+id/radioAmbulanceType"
+            android:layout_below="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/basicRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:checked="true"
+                android:onClick="onRadioButtonClicked"
+                android:text="Basic Ambulance"
+                android:fontFamily="@font/semibold"/>
+
+            <RadioButton
+                android:id="@+id/advancedRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:onClick="onRadioButtonClicked"
+                android:text="Advanced Life Support"
+                android:fontFamily="@font/semibold"/>
+
+
+        </RadioGroup>
+        <!-- location -->
+        <EditText
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@+id/radioAmbulanceType"
+            android:background="@drawable/circularbordersolid"
+            android:fontFamily="@font/regular"
+            android:hint="Enter Your Location"
+            android:inputType="textEmailAddress"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="17sp" />
+
+        <!--        selection-->
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:paddingTop="15dp"
+            android:layout_below="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.35"
+                android:gravity="left"
+                android:text="Ambulances"
+                android:fontFamily="@font/regular"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:gravity="right"
+                android:text="Amount"
+                android:fontFamily="@font/regular"
+                android:textSize="16sp"
+
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:gravity="right"
+                android:text="Price"
+                android:fontFamily="@font/regular"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.35"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/topDecBtn"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/minus"
+                    android:onClick="topDec" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/home" />
+
+                <ImageView
+                    android:id="@+id/topIncBtn"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/add"
+                    android:onClick="topInc" />
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:gravity="right"
+                android:text="0"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:layout_weight="0.2"
+                android:gravity="right"
+                android:text="0"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linearLayout6"
+            android:fontFamily="@font/regular"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Pick Date and Time."
+            android:textColor="@color/green"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <DatePicker
+            android:id="@+id/date_picker"
+            android:layout_below="@id/textView4"
+            android:layout_width="wrap_content"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:datePickerMode="calendar" />
+
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_below="@id/date_picker"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/providertext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Please Choose Ambulance Service Provider"
+            android:textColor="@color/green"
+            android:textStyle="italic"
+            android:textSize="17dp"
+            android:layout_below="@+id/time_picker"/>
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_below="@+id/providertext"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/hospitaltext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/spinner1"
+            android:text="Please Choose Hospital To go to"
+            android:textSize="17dp"
+            android:textStyle="italic"
+            android:textColor="@color/green"/>
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/hospitaltext" />
+
+        <Button
+            android:id="@+id/booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinner2"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/circularbluebordersolid"
+            android:fontFamily="@font/regular"
+            android:text="Book Ambulance" />
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</ScrollView>

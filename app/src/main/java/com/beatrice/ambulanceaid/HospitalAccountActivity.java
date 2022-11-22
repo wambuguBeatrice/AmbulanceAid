@@ -27,13 +27,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
+public class HospitalAccountActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
 
-    Button btnsignup;
-    EditText inputName,inputEmail, inputpassword, inputpassword1, input_phoneNumber,input_EmergencyPersonName,input_EmergencyPersonContacts;
+    Button btn_HospitalSignUp;
+    EditText input_hospitalName,input_hospitalEmail, input_HospitalPhoneNumber, input_hospitalpassword, input_hospitalpassword1;
     LinearLayout linklogin;
 
     private ProgressDialog progressDialog;
@@ -43,75 +43,78 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
-        setContentView(R.layout.activity_signup);
+        overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+        setContentView(R.layout.activity_hospitalaccount);
 
-        //hide
         getSupportActionBar().hide();
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        // Initialize
-        input_EmergencyPersonContacts = findViewById(R.id.input_EmergencyPersonContacts);
-        input_EmergencyPersonName = findViewById(R.id.input_EmergencyPersonName);
-        input_phoneNumber = findViewById(R.id.input_PhoneNumber);
-        inputName = findViewById(R.id.input_Name);
+        //initialize
+        input_hospitalEmail = findViewById(R.id.input_hospitalEmail);
+        input_hospitalName = findViewById(R.id.input_hospitalEmail);
+        input_HospitalPhoneNumber = findViewById(R.id.input_HospitalPhoneNumber);
+        input_hospitalpassword = findViewById(R.id.input_hospitalpassword);
         linklogin =(LinearLayout) findViewById(R.id.link_login);
-        inputEmail = (EditText) findViewById(R.id.input_email);
-        inputpassword = (EditText) findViewById(R.id.input_password);
-        inputpassword1 = (EditText) findViewById(R.id.input_password1);
-        btnsignup = (Button) findViewById(R.id.btn_signup);
+        input_hospitalpassword1 = (EditText) findViewById(R.id.input_hospitalpassword1);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCanceledOnTouchOutside(false);
 
-        // Set listeners
-        linklogin.setOnClickListener(this);
-        btnsignup.setOnClickListener(this);
+        //not sure
+        linklogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HospitalAccountActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn_HospitalSignUp = findViewById(R.id.btn_Hospitalsignup);
+        btn_HospitalSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inputData();
+            }
+        });
     }
 
-    // Register user
-    private String email, password, confirmPassword, name,phoneNumber, emergencyPersonName,  emergencyPersonPhoneNumber;
-    private void registerUser(){
-         email = inputEmail.getText().toString().trim();
-
-       password = inputpassword.getText().toString().trim();
-         confirmPassword = inputpassword1.getText().toString().trim();
-        name = inputName.getText().toString().trim();
-        phoneNumber = input_phoneNumber.getText().toString().trim();
-        emergencyPersonName = input_EmergencyPersonName.getText().toString().trim();
-        emergencyPersonPhoneNumber = input_EmergencyPersonContacts.getText().toString().trim();
+    String hospitalName, hospitalEmail, hospitalNumber, password, confirmPassword,email;
+    private void inputData() {
+        hospitalName = input_hospitalName.getText().toString().trim();
+        password = input_hospitalpassword.getText().toString().trim();
+        confirmPassword = input_hospitalpassword1.getText().toString().trim();
+        hospitalEmail =  input_hospitalEmail.getText().toString().trim();
+        hospitalNumber = input_HospitalPhoneNumber.getText().toString().trim();
 
         // If email is empty, please enter email
-        if (TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(hospitalEmail)) {
             Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // If password is empty, please enter password
-        if (TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // If confirm password is empty, please confirm
-        if (TextUtils.isEmpty(confirmPassword) || !password.equals(confirmPassword)){
+        if (TextUtils.isEmpty(confirmPassword) || !password.equals(confirmPassword)) {
             Toast.makeText(this, "Please confirm password", Toast.LENGTH_SHORT).show();
             return;
         }
-
         progressDialog.setMessage("Registering your account. Please wait...");
         progressDialog.show();
 
         // Create user with email and password
-        firebaseAuth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>(){
+        firebaseAuth.createUserWithEmailAndPassword(hospitalEmail, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task){
+                    public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -120,36 +123,34 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         // Successfully registered user, please verify through user email
                                         saveToFirebase();
                                         Toast.makeText(context, "Kindly check your email for verification.", Toast.LENGTH_SHORT).show();
-                                    }
-                                    else{
-                                        Toast.makeText(context, task.getException().getMessage() , Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                             finish();
                             // Redirect to login activity
                             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                        }
-                        else {
-                            Toast.makeText(SignUpActivity.this,"Could not register you ... Please try again",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(HospitalAccountActivity.this, "Could not register you ... Please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
     }
+
 
     private void saveToFirebase() {
         progressDialog.setMessage("Saving account info");
         final String timestamp = "" +System.currentTimeMillis();
 
         // set up to save to firebase
-        HashMap <String, Object > hashMap = new HashMap<>();
+        HashMap<String, Object > hashMap = new HashMap<>();
         hashMap.put("uid", "" + firebaseAuth.getUid());
-        hashMap.put("email", "" + email);
-        hashMap.put("name", "" + name);
-        hashMap.put("phoneNumber", "" + phoneNumber);
-        hashMap.put("emergencyPersonName", "" + emergencyPersonName);
-        hashMap.put("emergencyPersonPhoneNumber", "" + emergencyPersonPhoneNumber);
-        hashMap.put("accountType","User");
+        hashMap.put("email", "" + hospitalEmail);
+        hashMap.put("name", "" + hospitalName);
+        hashMap.put("phoneNumber", "" + hospitalNumber);
+        hashMap.put("accountType","Hospital");
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.child(firebaseAuth.getUid()).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -157,29 +158,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onSuccess(Void unused) {
                 // db update
                 progressDialog.dismiss();
-                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                startActivity(new Intent(HospitalAccountActivity.this, LoginActivity.class));
                 finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressDialog.dismiss();
-                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                startActivity(new Intent(HospitalAccountActivity.this, MainActivity.class));
                 finish();
             }
         });
     }
 
-    @Override
-    public void onClick(View view){
-        if (view == btnsignup){
-            // Register user
-            registerUser();
-        }
-        else if (view == linklogin){
-            finish();
-            // Redirect to login activity
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-    }
 }

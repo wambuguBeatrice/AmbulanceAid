@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -71,7 +68,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/Name"
+                    android:id="@+id/HospitalName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -80,19 +77,19 @@
                     android:padding="18dp">
 
                     <EditText
-                        android:id="@+id/input_Name"
+                        android:id="@+id/input_hospitalName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:fontFamily="@font/regular"
-                        android:hint="Enter Name"
+                        android:hint="Hospital or Organization Name"
                         android:inputType="textPersonName"
                         android:textSize="14sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/email"
+                    android:id="@+id/hospitalEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -101,12 +98,12 @@
                     android:padding="18dp">
 
                     <EditText
-                        android:id="@+id/input_email"
+                        android:id="@+id/input_hospitalEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:fontFamily="@font/regular"
-                        android:hint="Email"
+                        android:hint="Hospital or Organization Official Email"
                         android:inputType="textEmailAddress"
                         android:textSize="14sp" />
 
@@ -114,7 +111,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/phoneNumber"
+                    android:id="@+id/HospitalphoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -123,12 +120,12 @@
                     android:padding="18dp">
 
                     <EditText
-                        android:id="@+id/input_PhoneNumber"
+                        android:id="@+id/input_HospitalPhoneNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:fontFamily="@font/regular"
-                        android:hint="Phone Number"
+                        android:hint="Hospital or Organization Official Contact Number"
                         android:inputType="phone"
                         android:textSize="14sp" />
 
@@ -136,7 +133,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/EmergencyPersonName"
+                    android:id="@+id/Hospitalpasswordll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -145,51 +142,7 @@
                     android:padding="18dp">
 
                     <EditText
-                        android:id="@+id/input_EmergencyPersonName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:fontFamily="@font/regular"
-                        android:hint="Name of Emergency Person"
-                        android:inputType="textPersonName"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/EmergencyPersonContacts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/circularbordersolid"
-                    android:gravity="center"
-                    android:padding="18dp">
-
-                    <EditText
-                        android:id="@+id/input_EmergencyPersonContacts"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:fontFamily="@font/regular"
-                        android:hint="Phone Number Of Emergency Person"
-                        android:inputType="phone"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/passwordll"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/circularbordersolid"
-                    android:gravity="center"
-                    android:padding="18dp">
-
-                    <EditText
-                        android:id="@+id/input_password"
+                        android:id="@+id/input_hospitalpassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -201,7 +154,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/passwordl2"
+                    android:id="@+id/hospitalpasswordl2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -210,7 +163,7 @@
                     android:padding="18dp">
 
                     <EditText
-                        android:id="@+id/input_password1"
+                        android:id="@+id/input_hospitalpassword1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -233,7 +186,7 @@
                     android:textSize="12sp" />
 
                 <Button
-                    android:id="@+id/btn_signup"
+                    android:id="@+id/btn_Hospitalsignup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -279,4 +232,3 @@
 
     </RelativeLayout>
 </ScrollView>
-
